@@ -1,3 +1,9 @@
+本插件为免费开源插件，为防止倒卖特放到Github托管.
+
+对此插件的相关问题，可提交Issues，会对相关的问题进行解答.
+
+如果不想提交Issus，想直接一条龙安装架设服务请联系QQ28707775，可提供有偿服务
+
  WHMCSshadowsocks插件
 本插件需要WHMCS 和 Shadowsocks-manyuser
 
