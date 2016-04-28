@@ -311,10 +311,14 @@ function shadowsocks_ClientArea($params) {
 		mysql_select_db($params['configoption1'],$mysql);
 		//Traffic
 		$traffic = $params['configoptions']['traffic'];
+        
 		//Usage
-		$Query = mysql_query("SELECT sum(u+d),port,passwd FROM user WHERE pid='".$params['serviceid']."'",$mysql);
+		$Query = mysql_query("SELECT sum(u+d),port,passwd,transfer_enable FROM user WHERE pid='".$params['serviceid']."'",$mysql);
 		$Query = mysql_fetch_array($Query);
-		$Usage = $Query[0] / 1073741824;
+		$Usage = $Query[0] / 1048576;
+        
+        //databaseTraffic
+        $traffic = $Query['transfer_enable'] / 1048576;
 		//Port 1048576 1073741824
 		// $QueryPort = mysql_query("SELECT port FROM user WHERE pid='".$params['pid']."'");
 		// $QUeryPort = mysql_fetch_array($QueryPort);
@@ -327,8 +331,11 @@ function shadowsocks_ClientArea($params) {
 		$Usage = round($Usage,2);
 		$Free = round($Free,2);
 		$node = shadowsocks_node($params);
+        
+        //debug
+        $decodeQuery = json_encode($Query);
 	}
-    if (isset($params['configoptions']['traffic'])) {
+    if (isset( $traffic )) {
     	$html = "
     	<div class=\"row\">
 			<div class=\"col-sm-4\"></div>
@@ -337,7 +344,7 @@ function shadowsocks_ClientArea($params) {
 				<table class=\"table table-bordered table-hover tc-table\">
 					<tbody>
 						<tr>
-							<td>流量限制</td><td>{$traffic} GB</td>
+							<td>流量限制</td><td>{$traffic} MBytes</td>
 						</tr>
 						<tr>
 							<td>加密方式</td><td>{$params['configoption2']}</td>
@@ -349,10 +356,10 @@ function shadowsocks_ClientArea($params) {
 							<td>连接密码</td><td>{$password}</td>
 						</tr>
                         <tr>
-							<td>已经使用</td><td>{$Usage} GB</td>
+							<td>已经使用</td><td>{$Usage} MBytes</td>
 						</tr>
 						<tr>
-							<td>剩余流量</td><td>{$Free} GB</td>
+							<td>剩余流量</td><td>{$Free} MBytes</td>
 						</tr>
 						<tr>
 							<td>节点列表</td><td>{$node}</td>
@@ -388,6 +395,10 @@ function shadowsocks_ClientArea($params) {
 						</tr>
 						<tr>
 							<td>已经使用 </td><td>{$Usage} MBytes</td>
+						</tr>
+                        <tr>
+							<td>剩余流量</td><td>{$Free} MBytes</td>
+							
 						</tr>
 					</tbody>
 				</table>
