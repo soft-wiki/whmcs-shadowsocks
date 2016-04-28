@@ -1,3 +1,14 @@
+## WHMCS shadowsocks插件（修復bug）  
+
+### 修復了以下bug  
+- 流量顯示問題
+- 自定義字段 區域名稱 'password|Password'  
+- 自定義字段 驗證 '/^[\w]{4,16}$/i'  
+
+HoshinoTouko
+
+---
+
 本插件为免费开源插件，为防止倒卖特放到Github托管，共享此插件的不是作者本人.
 
 但对此插件的相关问题，可提交Issues，会对相关的问题进行解答.
