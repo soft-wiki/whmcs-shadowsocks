@@ -394,10 +394,10 @@ function shadowsocks_ClientArea($params) {
 							<td>连接密码</td><td>{$password}</td>
 						</tr>
 						<tr>
-							<td>已经使用 </td><td>{$Usage} GB</td>
+							<td>已经使用 </td><td>{$Usage} MBytes</td>
 						</tr>
                         <tr>
-							<td>剩余流量</td><td>{$Free} GB</td>
+							<td>剩余流量</td><td>{$Free} MBytes</td>
 							
 						</tr>
 					</tbody>
